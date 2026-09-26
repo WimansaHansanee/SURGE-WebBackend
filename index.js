@@ -20,6 +20,8 @@ let latestSensorData = {
   ]
 };
 
+  
+
 
 // Test endpoint matching your IoT HTTP POST payload. Arduino POSTs data here.
 app.post('/api/sensor-data', (req, res) => {

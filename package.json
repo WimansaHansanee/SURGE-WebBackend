@@ -22,7 +22,8 @@
   "homepage": "https://github.com/WimansaHansanee/SURGE-WebBackend#readme",
   "dependencies": {
     "cors": "^2.8.6",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "sqlite3": "^6.0.1"
   },
   "devDependencies": {
     "nodemon": "^3.1.14"
