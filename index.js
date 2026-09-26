@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const sqlite3 = require('sqlite3').verbose()''
 
 const app = express();
 const PORT = 3000;
@@ -20,8 +21,13 @@ let latestSensorData = {
   ]
 };
 
-  
 
+//Initialize the sqlite3 database
+const db = sqlite3.Database('./sensorData.db');
+db.serialize(()=>{
+  //Create a table in the database
+  db.run("CREATE TABLE IF NOT EXISTS history (time TEXT, s1 REAL, s2 REAL, s3 REAL, s4 REAL)");
+})
 
 // Test endpoint matching your IoT HTTP POST payload. Arduino POSTs data here.
 app.post('/api/sensor-data', (req, res) => {
@@ -33,18 +39,32 @@ app.post('/api/sensor-data', (req, res) => {
   // Save the incoming data from Arduino
   if (req.body && req.body.readings) {
     latestSensorData = req.body;
-  }
+    const time = new Date().toLocaleDateString();
+    const r = latestSensorData.readings;
 
+    //Insert data in to the database
+    db.run("INSERT INTO history (time, s1, s2, s3, s4) VALUES (?, ?, ?, ?, ?)", 
+    [time, r[0].distance_cm, r[1].distance_cm, r[2].distance_cm, r[3].distance_cm]);
+  }
   // Respond with HTTP 200 OK
   res.status(200).json({
     status: 'success',
-    message: 'Data successfully received by backend'
+    message: 'Data successfully received by backend and added to the database'
   });
 });
 
   // React frontend GETs data from here
 app.get('/api/sensor-data', (req, res) => {
-  res.status(200).json(latestSensorData);
+  // Fetch the last 20 readings for the chart
+  db.all("SELECT * FROM history ORDER BY rowid DESC LIMIT 20", (err, rows) => {
+    if (err) return res.status(500).send(err);
+    // Reverse to chronological order (left to right)
+    res.status(200).json(rows.reverse());
+  });
+  res.status(200).json({
+    latest : latestSensorData,
+    history_data : rows.reverse()
+  });
 });
 
 // Simple root route to verify the server is running in browser
