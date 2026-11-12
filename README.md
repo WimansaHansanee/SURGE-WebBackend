@@ -10,7 +10,7 @@ The system continuously measures water clearance height at river locations using
 
 ![](assets/flow.jpeg)
 
-## Usage (Frontend)
+## Usage (Backend)
 
 - Clone the repo:
 
