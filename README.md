@@ -21,6 +21,7 @@ git clone https://github.com/WimansaHansanee/SURGE-WebBackend.git
 - Install dependencies:
 
 ```bash
+cd SURGE-WebBackend
 npm install
 ```
 
@@ -72,3 +73,14 @@ If physical hardware is disconnected, you can simulate realistic river level dri
 | SURGE-010 | Walawe Ganga                 |
 
 All the `.bat` files are here.
+
+
+
+## References
+
+
+- [Web Frontend](https://github.com/WimansaHansanee/SURGE-WebFrontend)
+
+- [Arduino Code and Hardware Wiring]()
+
+- [Simulators](https://github.com/ZentrixMora/SURGE-Simulators)
