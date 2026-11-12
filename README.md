@@ -81,6 +81,6 @@ All the `.bat` files are here.
 
 - [Web Frontend](https://github.com/WimansaHansanee/SURGE-WebFrontend)
 
-- [Arduino Code and Hardware Wiring]()
+- [Arduino Code and Hardware Wiring](https://github.com/ZentrixMora/SURGE-Arduino)
 
 - [Simulators](https://github.com/ZentrixMora/SURGE-Simulators)
